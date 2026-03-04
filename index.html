@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MATH7601 Computational Methods — 历年真题解析 for Chang Guo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&family=Noto+Serif+SC:wght@400;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]},svg:{fontCache:'global'}}</script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" async></script>
+<style>
+:root {
+  --bg: #FDFBF7;
+  --bg-card: #FFFFFF;
+  --bg-sidebar: #F5F0E8;
+  --bg-code: #F8F5EF;
+  --bg-theorem: #FFF8E7;
+  --bg-solution: #FAFAF7;
+  --bg-hover: #EDE8DD;
+  --text: #2C2417;
+  --text-secondary: #6B5D4D;
+  --text-muted: #9A8C7A;
+  --accent: #C45D3E;
+  --accent-light: #F5E6E0;
+  --accent2: #2E7D5B;
+  --accent2-light: #E0F2EA;
+  --border: #E5DFD3;
+  --border-light: #EDE8DD;
+  --shadow: 0 2px 12px rgba(44,36,23,0.06);
+  --shadow-lg: 0 8px 32px rgba(44,36,23,0.1);
+  --radius: 10px;
+  --radius-sm: 6px;
+  --sidebar-w: 280px;
+  --font-serif: 'Crimson Pro', 'Noto Serif SC', serif;
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"] {
+  --bg: #1A1714;
+  --bg-card: #242018;
+  --bg-sidebar: #1E1B16;
+  --bg-code: #2A2520;
+  --bg-theorem: #2A2518;
+  --bg-solution: #211E18;
+  --bg-hover: #332E25;
+  --text: #E8E0D4;
+  --text-secondary: #B5A894;
+  --text-muted: #7D7162;
+  --accent: #E07A5F;
+  --accent-light: #3A2520;
+  --accent2: #4CAF7D;
+  --accent2-light: #1A2E24;
+  --border: #3A3428;
+  --border-light: #2E2922;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.75;
+  transition: background var(--transition), color var(--transition);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  position: fixed; top:0; left:0;
+  width: var(--sidebar-w); height:100vh;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  overflow-y: auto; z-index: 100;
+  padding: 24px 0;
+  transition: transform var(--transition), background var(--transition);
+}
+
+.sidebar-header {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+
+.sidebar-header h1 {
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+
+.sidebar-header p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.sidebar nav { padding: 0 12px; }
+
+.nav-section {
+  margin-bottom: 8px;
+}
+
+.nav-section-title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding: 8px 8px 4px;
+}
+
+.nav-link {
+  display: block;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s;
+  line-height: 1.5;
+}
+
+.nav-link:hover { background: var(--bg-hover); color: var(--text); }
+.nav-link.active { background: var(--accent-light); color: var(--accent); font-weight: 600; }
+
+.theme-toggle {
+  position: fixed; bottom: 20px; left: 20px;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  z-index: 200;
+  transition: all 0.2s;
+  box-shadow: var(--shadow);
+}
+.theme-toggle:hover { transform: scale(1.1); }
+
+/* Mobile hamburger */
+.hamburger {
+  display: none;
+  position: fixed; top: 16px; left: 16px;
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  cursor: pointer;
+  z-index: 300;
+  align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: var(--shadow);
+}
+
+/* ===== MAIN ===== */
+.main {
+  margin-left: var(--sidebar-w);
+  padding: 48px 60px 120px;
+  max-width: 920px;
+}
+
+.hero {
+  margin-bottom: 56px;
+  padding-bottom: 40px;
+  border-bottom: 2px solid var(--border);
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.hero .subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-family: var(--font-serif);
+}
+
+.hero .meta {
+  margin-top: 16px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  margin-right: 6px;
+}
+.badge-year { background: var(--accent-light); color: var(--accent); }
+.badge-topic { background: var(--accent2-light); color: var(--accent2); }
+
+/* ===== TOPIC SECTIONS ===== */
+.topic-section {
+  margin-bottom: 64px;
+}
+
+.topic-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  padding-top: 24px;
+}
+
+.topic-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  margin-bottom: 32px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+/* ===== QUESTION CARD ===== */
+.question-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 28px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.question-card:hover { box-shadow: var(--shadow-lg); }
+
+.question-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.question-id {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.question-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.question-body {
+  padding: 20px 24px;
+}
+
+.question-body .en {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.question-body .zh {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  padding-left: 16px;
+  border-left: 3px solid var(--accent-light);
+}
+
+/* ===== THEOREM CARD ===== */
+.theorem-card {
+  background: var(--bg-theorem);
+  border: 1px solid #E8DFC0;
+  border-left: 4px solid #D4A843;
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 16px 0;
+  font-size: 0.9rem;
+}
+
+[data-theme="dark"] .theorem-card {
+  border-color: #4A3F28;
+  border-left-color: #D4A843;
+}
+
+.theorem-card .theorem-title {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #9A7B2F;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theorem-card .theorem-title::before {
+  content: '💡';
+  font-size: 0.9rem;
+}
+
+/* ===== SOLUTION ===== */
+.solution-toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 24px;
+  background: var(--bg-solution);
+  border: none;
+  border-top: 1px solid var(--border-light);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--accent);
+  gap: 8px;
+  transition: background 0.2s;
+}
+.solution-toggle:hover { background: var(--bg-hover); }
+
+.solution-toggle .arrow {
+  transition: transform 0.3s;
+  font-size: 0.7rem;
+}
+
+.solution-toggle.open .arrow { transform: rotate(90deg); }
+
+.solution-content {
+  display: none;
+  padding: 24px;
+  border-top: 1px solid var(--border-light);
+  background: var(--bg-solution);
+  animation: fadeIn 0.3s;
+}
+
+.solution-content.show { display: block; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.solution-content h4 {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin: 20px 0 10px;
+}
+.solution-content h4:first-child { margin-top: 0; }
+
+.solution-content p, .solution-content li {
+  font-size: 0.92rem;
+  line-height: 1.85;
+  color: var(--text);
+}
+
+.solution-content ul, .solution-content ol {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.step {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  margin: 12px 0;
+}
+
+.step-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+
+/* ===== CODE BLOCK ===== */
+.code-block {
+  position: relative;
+  margin: 16px 0;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 14px;
+  background: var(--bg-hover);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.copy-btn {
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.copy-btn.copied { background: var(--accent2); color: white; border-color: var(--accent2); }
+
+.code-block pre {
+  margin: 0;
+  padding: 16px;
+  background: var(--bg-code);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.code-block code {
+  font-family: var(--font-mono);
+}
+
+/* Syntax highlighting */
+.kw { color: #C45D3E; font-weight: 600; }
+.fn { color: #2E7D5B; }
+.str { color: #9A7B2F; }
+.cm { color: var(--text-muted); font-style: italic; }
+.num { color: #6B4FA0; }
+.op { color: var(--text-secondary); }
+
+/* ===== INTERACTIVE VIZ ===== */
+.viz-container {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin: 16px 0;
+  text-align: center;
+}
+
+.viz-container canvas {
+  max-width: 100%;
+  border-radius: var(--radius-sm);
+}
+
+.viz-controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+.viz-btn {
+  padding: 6px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  color: var(--text);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: var(--font-sans);
+}
+.viz-btn:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.viz-btn.active { background: var(--accent); color: white; border-color: var(--accent); }
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+}
+
+.matrix-display {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  display: inline-block;
+  text-align: center;
+  margin: 8px;
+  line-height: 1.6;
+}
+
+/* ===== FOOTER ===== */
+.footer {
+  margin-top: 80px;
+  padding: 32px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.footer a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.footer a:hover { text-decoration: underline; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .hamburger { display: flex; }
+  .main { margin-left: 0; padding: 64px 24px 100px; }
+  .hero h1 { font-size: 1.8rem; }
+  .theme-toggle { left: auto; right: 20px; }
+}
+
+@media (max-width: 600px) {
+  .main { padding: 56px 16px 80px; }
+  .question-body { padding: 16px; }
+  .solution-content { padding: 16px; }
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Print */
+@media print {
+  .sidebar, .hamburger, .theme-toggle { display: none !important; }
+  .main { margin-left: 0; }
+  .solution-content { display: block !important; }
+}
+
+/* MathJax overrides */
+mjx-container { overflow-x: auto; overflow-y: hidden; padding: 2px 0; }
+</style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <h1>MATH7601</h1>
+    <p>Computational Methods<br>历年真题解析 · UCL</p>
+  </div>
+  <nav>
+    <div class="nav-section">
+      <div class="nav-section-title">一 · 计算基础</div>
+      <a class="nav-link" href="#topic1">BLAS / LAPACK / 浮点数</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">二 · 线性方程组</div>
+      <a class="nav-link" href="#topic2">LU 分解与求解</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">三 · 最小二乘</div>
+      <a class="nav-link" href="#topic3">最小二乘问题</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">四 · 特征值</div>
+      <a class="nav-link" href="#topic4">特征值与特征向量</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">五 · 插值</div>
+      <a class="nav-link" href="#topic5">多项式插值</a>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-title">六 · 数值积分</div>
+      <a class="nav-link" href="#topic6">数值求积</a>
+    </div>
+  </nav>
+</aside>
+
+<button class="hamburger" id="hamburger" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+<button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+
+<!-- Main Content -->
+<main class="main">
+  <section class="hero">
+    <h1>MATH7601 历年真题精解 for Chang Guo</h1>
+    <p class="subtitle">UCL Computational Methods and Programming · 完整解析</p>
+    <div class="meta">
+      <span class="badge badge-year">2013</span>
+      <span class="badge badge-year">2014</span>
+      <span class="badge badge-year">2015</span>
+      <span class="badge badge-year">2017</span>
+      覆盖 7 套试卷 · 6 大主题 · 含定理证明 · 可交互可视化
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 1: Computing Basics                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic1">
+    <h2 class="topic-title">一 · 计算基础</h2>
+    <p class="topic-desc">BLAS、LAPACK、浮点算术、并行计算 — 每年必考的概念简答题</p>
+
+    <!-- Q1a: BLAS -->
+    <div class="question-card" id="q1a">
+      <div class="question-header">
+        <span class="question-id">Q1(a) — 高频题</span>
+        <div class="question-tags">
+          <span class="badge badge-year">2013–2017</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">What is BLAS? Give a short explanation of the different BLAS Levels 1, 2 and 3.</div>
+        <div class="zh">什么是 BLAS？简要解释 BLAS Level 1、2、3 的区别。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>解答</h4>
+        <p><strong>BLAS</strong>（Basic Linear Algebra Subprograms，基本线性代数子程序）是一组标准化的低级线性代数运算接口。它将运算按计算复杂度分为三级：</p>
+
+        <div class="step">
+          <div class="step-label">Level 1 — 向量-向量运算</div>
+          <p>例如：$y \leftarrow \alpha x + y$（AXPY）、内积 $x^T y$、向量范数 $\|x\|_2$。</p>
+          <p>运算量：$O(n)$，数据量：$O(n)$，计算/数据比 ≈ $O(1)$。</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Level 2 — 矩阵-向量运算</div>
+          <p>例如：$y \leftarrow \alpha A x + \beta y$（GEMV）。</p>
+          <p>运算量：$O(n^2)$，数据量：$O(n^2)$，计算/数据比 ≈ $O(1)$。</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Level 3 — 矩阵-矩阵运算</div>
+          <p>例如：$C \leftarrow \alpha A B + \beta C$（GEMM）。</p>
+          <p>运算量：$O(n^3)$，数据量：$O(n^2)$，计算/数据比 ≈ $O(n)$。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q1b: Why Level 3 peak -->
+    <div class="question-card" id="q1b">
+      <div class="question-header">
+        <span class="question-id">Q1(b) — 高频题</span>
+        <div class="question-tags">
+          <span class="badge badge-year">2013–2017</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">Explain why BLAS Level 3 matrix-matrix product can come close to the peak performance of a processor.</div>
+        <div class="zh">解释为什么 BLAS Level 3 矩阵-矩阵乘法能接近处理器的峰值性能。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>解答</h4>
+        <p>关键在于<strong>计算量与数据访问量的比值</strong>（arithmetic intensity）。</p>
+        <p>对于 $n \times n$ 矩阵乘法：需 $O(n^3)$ 次浮点运算，但仅需读取 $O(n^2)$ 个数据。这意味着每个从内存加载到缓存的数据元素可以被<strong>重复使用 $O(n)$ 次</strong>。</p>
+        <p>通过分块（blocking）技术，将子矩阵放入高速缓存（cache）中，在缓存内完成大量计算后再换入新数据。这使得处理器的浮点运算单元能被充分利用，内存带宽不再是瓶颈，从而接近峰值 FLOPS。</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">缓存局部性原理</div>
+          <p>现代 CPU 有多级缓存（L1/L2/L3），访问速度远快于主内存。Level 3 BLAS 通过分块使数据在缓存中被多次重用，避免了反复访问慢速主内存。相比之下，Level 1 和 Level 2 的计算/数据比为 $O(1)$，性能受限于内存带宽（memory-bound）。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q1c: LAPACK -->
+    <div class="question-card" id="q1c">
+      <div class="question-header">
+        <span class="question-id">Q1(c) — 高频题</span>
+        <div class="question-tags"><span class="badge badge-year">2013–2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">What is LAPACK? Explain the relationship to BLAS.</div>
+        <div class="zh">什么是 LAPACK？说明它与 BLAS 的关系。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>解答</h4>
+        <p><strong>LAPACK</strong>（Linear Algebra PACKage）是建立在 BLAS 之上的高级线性代数库，提供求解线性方程组、最小二乘问题、特征值问题、奇异值分解等功能。</p>
+        <p>LAPACK 的算法被设计为<strong>尽可能调用 BLAS Level 3</strong> 的矩阵-矩阵运算（如分块 LU 分解），从而在不同硬件上自动获得接近峰值的性能。用户只需提供高效的 BLAS 实现（如 Intel MKL、OpenBLAS），LAPACK 就能高效运行。</p>
+      </div>
+    </div>
+
+    <!-- Q1d: Vectorized operations -->
+    <div class="question-card" id="q1d">
+      <div class="question-header">
+        <span class="question-id">Q1(d)</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2015</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Explain why vectorized operations in scripting languages are preferable to for-loops.</div>
+        <div class="zh">解释为什么脚本语言中向量化操作优于 for 循环。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>解答</h4>
+        <p>像 Python（NumPy）/ MATLAB 这样的脚本语言是<strong>解释执行</strong>的，每次循环迭代都有巨大的解释器开销（类型检查、动态分派等）。</p>
+        <p>向量化操作（如 <code>A @ B</code>、<code>np.dot</code>）将整个运算交给底层的<strong>编译后的 C/Fortran BLAS 库</strong>执行，循环在编译语言层面进行，避免了解释器开销，并能利用 SIMD 指令和缓存优化。</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Python 示例</span>
+            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          </div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> time
+
+n = <span class="num">10000</span>
+a = np.random.rand(n)
+b = np.random.rand(n)
+
+<span class="cm"># ❌ 慢：Python for 循环</span>
+t0 = time.time()
+s = <span class="num">0.0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(n):
+    s += a[i] * b[i]
+<span class="fn">print</span>(<span class="str">f"for-loop: {time.time()-t0:.4f}s"</span>)
+
+<span class="cm"># ✅ 快：向量化操作</span>
+t0 = time.time()
+s = np.<span class="fn">dot</span>(a, b)
+<span class="fn">print</span>(<span class="str">f"vectorized: {time.time()-t0:.6f}s"</span>)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Q1e: Parallelism -->
+    <div class="question-card" id="q1e">
+      <div class="question-header">
+        <span class="question-id">Q1(e)</span>
+        <div class="question-tags"><span class="badge badge-year">综合</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Explain shared memory parallelism vs distributed memory parallelism.</div>
+        <div class="zh">解释共享内存并行与分布式内存并行。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>共享内存并行（Shared Memory）</h4>
+        <p>多个线程/处理器核心共享同一块内存地址空间。典型实现为 <strong>OpenMP</strong>。优点是编程简单（通过指令注解），缺点是可扩展性受限于单机核心数，需注意竞态条件（race condition）。</p>
+
+        <h4>分布式内存并行（Distributed Memory）</h4>
+        <p>每个处理器有独立的内存空间，通过网络<strong>消息传递</strong>（message passing）交换数据。典型实现为 <strong>MPI</strong>。优点是可扩展到数千节点，缺点是编程复杂，需显式管理通信。</p>
+      </div>
+    </div>
+
+    <!-- Machine precision -->
+    <div class="question-card" id="q1-eps">
+      <div class="question-header">
+        <span class="question-id">Q1(d/e) — 浮点数</span>
+        <div class="question-tags"><span class="badge badge-year">2014/2015/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Define the machine precision $\epsilon_{\text{mach}}$ and explain what it means. State the fundamental axiom of floating point arithmetic.</div>
+        <div class="zh">定义机器精度 $\epsilon_{\text{mach}}$ 并解释其含义。给出浮点算术的基本公理。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>机器精度 $\epsilon_{\text{mach}}$</h4>
+        <p><strong>定义：</strong>$\epsilon_{\text{mach}}$ 是满足 $\text{fl}(1 + \epsilon) > 1$ 的最小正浮点数，即浮点系统能区分 $1$ 和 $1+\epsilon$ 的最小增量。</p>
+        <p>对于 IEEE 双精度（64位），$\epsilon_{\text{mach}} \approx 2.2 \times 10^{-16}$（即 $2^{-52}$）。</p>
+        <p><strong>含义：</strong>任何实数 $x$ 被舍入到浮点数 $\text{fl}(x)$ 时，相对误差不超过 $\epsilon_{\text{mach}}$。</p>
+
+        <h4>浮点算术基本公理</h4>
+        <div class="theorem-card">
+          <div class="theorem-title">Fundamental Axiom of Floating Point</div>
+          <p>对于任意实数 $x$（在浮点可表示范围内），存在 $\delta$ 满足 $|\delta| \le \epsilon_{\text{mach}}$，使得：
+          $$\text{fl}(x) = x(1 + \delta)$$
+          对于基本算术运算 $\circ \in \{+, -, \times, \div\}$：
+          $$\text{fl}(a \circ b) = (a \circ b)(1 + \delta), \quad |\delta| \le \epsilon_{\text{mach}}$$</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Backward/forward error -->
+    <div class="question-card" id="q1-error">
+      <div class="question-header">
+        <span class="question-id">Q1 — 误差分析</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2015/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Define relative backward error, relative forward error and condition number. When is an algorithm backward stable?</div>
+        <div class="zh">定义相对后向误差、相对前向误差和条件数。什么时候算法是后向稳定的？</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <p>设 $f: X \to Y$ 是精确映射，$\tilde{f}$ 是算法的近似计算。对于输入 $x$，算法输出 $\tilde{y} = \tilde{f}(x)$。</p>
+
+        <div class="step">
+          <div class="step-label">相对前向误差 (Relative Forward Error)</div>
+          <p>$$E_{\text{fwd}} = \frac{\|f(x) - \tilde{f}(x)\|}{\|f(x)\|}$$</p>
+          <p>度量输出结果与真实值之间的差距。</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">相对后向误差 (Relative Backward Error)</div>
+          <p>$$E_{\text{bwd}} = \min\left\{\frac{\|\delta x\|}{\|x\|} : f(x + \delta x) = \tilde{f}(x)\right\}$$</p>
+          <p>寻找最小扰动 $\delta x$，使得精确算法作用在扰动输入上恰好得到算法的实际输出。</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">条件数 (Condition Number)</div>
+          <p>$$\kappa = \lim_{\delta \to 0} \sup_{\|\delta x\| \le \delta \|x\|} \frac{\|f(x+\delta x)-f(x)\| / \|f(x)\|}{\|\delta x\| / \|x\|}$$</p>
+          <p>描述问题本身对输入扰动的敏感程度。</p>
+        </div>
+
+        <div class="theorem-card">
+          <div class="theorem-title">核心关系</div>
+          <p>$$\text{前向误差} \lesssim \kappa \times \text{后向误差}$$
+          条件数是问题固有的，与算法无关。后向误差度量算法质量。</p>
+        </div>
+
+        <p><strong>后向稳定性：</strong>如果对任意输入 $x$，算法的输出 $\tilde{f}(x) = f(x + \delta x)$，其中 $\|\delta x\|/\|x\| = O(\epsilon_{\text{mach}})$，则算法是后向稳定的。即算法的输出是某个"稍微扰动的输入"的精确解。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 2: LU Decomposition                   -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic2">
+    <h2 class="topic-title">二 · LU 分解与线性方程组</h2>
+    <p class="topic-desc">LU 分解、前代/回代求解、三对角矩阵、Cholesky 分解、条件数估计</p>
+
+    <!-- LU solve example -->
+    <div class="question-card" id="q2a">
+      <div class="question-header">
+        <span class="question-id">Q2(a) — LU 求解</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Solve the following system using LU decomposition without pivoting:
+$$\begin{bmatrix} 1 & 1 & 1 \\ 2 & 4 & 2 \\ -1 & 5 & 4 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 3 \\ 8 \\ 8 \end{bmatrix}$$</div>
+        <div class="zh">用不带行交换的 LU 分解求解上述线性方程组。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <div class="theorem-card">
+          <div class="theorem-title">LU 分解回顾</div>
+          <p>将 $A$ 分解为下三角 $L$（对角元为1）和上三角 $U$ 的乘积 $A = LU$。然后通过前代（forward substitution）解 $Ly = b$，再通过回代（back substitution）解 $Ux = y$。</p>
+        </div>
+
+        <h4>Step 1：LU 分解</h4>
+
+        <div class="step">
+          <div class="step-label">消去第一列</div>
+          <p>$\ell_{21} = a_{21}/a_{11} = 2/1 = 2$</p>
+          <p>$\ell_{31} = a_{31}/a_{11} = -1/1 = -1$</p>
+          <p>$R_2 \leftarrow R_2 - 2R_1$：$(2,4,2) - 2(1,1,1) = (0, 2, 0)$</p>
+          <p>$R_3 \leftarrow R_3 - (-1)R_1$：$(-1,5,4) + (1,1,1) = (0, 6, 5)$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">消去第二列</div>
+          <p>$\ell_{32} = 6/2 = 3$</p>
+          <p>$R_3 \leftarrow R_3 - 3R_2$：$(0,6,5) - 3(0,2,0) = (0, 0, 5)$</p>
+        </div>
+
+        <p>因此：</p>
+        <p>$$L = \begin{bmatrix} 1 & 0 & 0 \\ 2 & 1 & 0 \\ -1 & 3 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 1 & 1 & 1 \\ 0 & 2 & 0 \\ 0 & 0 & 5 \end{bmatrix}$$</p>
+
+        <h4>Step 2：前代 $Ly = b$</h4>
+        <div class="step">
+          <div class="step-label">Forward Substitution</div>
+          <p>$y_1 = 3$</p>
+          <p>$y_2 = 8 - 2 \cdot 3 = 2$</p>
+          <p>$y_3 = 8 - (-1)(3) - 3(2) = 8 + 3 - 6 = 5$</p>
+        </div>
+
+        <h4>Step 3：回代 $Ux = y$</h4>
+        <div class="step">
+          <div class="step-label">Back Substitution</div>
+          <p>$5x_3 = 5 \Rightarrow x_3 = 1$</p>
+          <p>$2x_2 = 2 \Rightarrow x_2 = 1$</p>
+          <p>$x_1 + 1 + 1 = 3 \Rightarrow x_1 = 1$</p>
+        </div>
+
+        <p><strong>答案：</strong>$x = (1, 1, 1)^T$</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Python 验证</span>
+            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          </div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.linalg <span class="kw">import</span> lu
+
+A = np.array([[<span class="num">1</span>,<span class="num">1</span>,<span class="num">1</span>],[<span class="num">2</span>,<span class="num">4</span>,<span class="num">2</span>],[<span class="num">-1</span>,<span class="num">5</span>,<span class="num">4</span>]], dtype=<span class="str">'float'</span>)
+b = np.array([<span class="num">3</span>,<span class="num">8</span>,<span class="num">8</span>], dtype=<span class="str">'float'</span>)
+
+<span class="cm"># LU 分解</span>
+P, L, U = lu(A)
+<span class="fn">print</span>(<span class="str">"L ="</span>, L)
+<span class="fn">print</span>(<span class="str">"U ="</span>, U)
+
+<span class="cm"># 求解</span>
+x = np.linalg.<span class="fn">solve</span>(A, b)
+<span class="fn">print</span>(<span class="str">"x ="</span>, x)  <span class="cm"># [1. 1. 1.]</span>
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- LU solve: lower triangular -->
+    <div class="question-card" id="q2a-lower">
+      <div class="question-header">
+        <span class="question-id">Q2(a) — 下三角系统</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Mock/2015/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Solve using LU decomposition:
+$$\begin{bmatrix} 2 & 0 & 0 \\ 4 & 3 & 0 \\ 8 & 9 & 5 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \\ x_3 \end{bmatrix} = \begin{bmatrix} 2 \\ 1 \\ 4 \end{bmatrix}$$</div>
+        <div class="zh">用 LU 分解求解上述下三角系统（矩阵本身已经是下三角）。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <p>注意矩阵 $A$ 本身就是下三角！所以 $L = A$，$U = I$（或者说这里只需直接前代）。</p>
+
+        <h4>直接前代求解 $Ax = b$</h4>
+        <div class="step">
+          <div class="step-label">逐步求解</div>
+          <p>$2x_1 = 2 \Rightarrow x_1 = 1$</p>
+          <p>$4(1) + 3x_2 = 1 \Rightarrow 3x_2 = -3 \Rightarrow x_2 = -1$</p>
+          <p>$8(1) + 9(-1) + 5x_3 = 4 \Rightarrow -1 + 5x_3 = 4 \Rightarrow x_3 = 1$</p>
+        </div>
+
+        <p><strong>答案：</strong>$x = (1, -1, 1)^T$</p>
+      </div>
+    </div>
+
+    <!-- Condition number bound -->
+    <div class="question-card" id="q2b-cond">
+      <div class="question-header">
+        <span class="question-id">Q2(b) — 条件数界</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2015</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $Ax = b$ and $A\tilde{x} = \tilde{b}$. Show that
+$$\frac{\|x - \tilde{x}\|}{\|x\|} \le \kappa(A)\frac{\|b - \tilde{b}\|}{\|b\|}$$
+where $\kappa(A) = \|A\| \cdot \|A^{-1}\|$.</div>
+        <div class="zh">证明解的相对误差受条件数乘以右端项相对扰动的约束。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>设 $\delta b = b - \tilde{b}$，则 $\delta x = x - \tilde{x} = A^{-1}b - A^{-1}\tilde{b} = A^{-1}\delta b$。</p>
+
+        <div class="step">
+          <div class="step-label">Step 1：估计 $\|\delta x\|$</div>
+          <p>$$\|\delta x\| = \|A^{-1}\delta b\| \le \|A^{-1}\| \cdot \|\delta b\|$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Step 2：估计 $\|x\|$ 的下界</div>
+          <p>由 $b = Ax$，得 $\|b\| \le \|A\| \cdot \|x\|$，即：</p>
+          <p>$$\frac{1}{\|x\|} \le \frac{\|A\|}{\|b\|}$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Step 3：合并</div>
+          <p>$$\frac{\|\delta x\|}{\|x\|} \le \|A^{-1}\| \cdot \|\delta b\| \cdot \frac{\|A\|}{\|b\|} = \kappa(A) \frac{\|\delta b\|}{\|b\|} \qquad \blacksquare$$</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tridiagonal LU -->
+    <div class="question-card" id="q2-tridiag">
+      <div class="question-header">
+        <span class="question-id">Q2(b/c) — 三对角 LU</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $A \in \mathbb{R}^{n \times n}$ be tridiagonal. Show that its LU decomposition can be computed in $O(n)$ operations. Also prove the explicit formulas for $L$ and $U$.</div>
+        <div class="zh">设 $A$ 为三对角矩阵（仅主对角线和上下相邻对角线非零），证明 LU 分解只需 $O(n)$ 次运算，并写出 $L$, $U$ 的递推公式。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <p>三对角矩阵形如：</p>
+        <p>$$A = \begin{bmatrix} \alpha & \beta \\ \gamma & \alpha & \beta \\ & \ddots & \ddots & \ddots \\ & & \gamma & \alpha & \beta \\ & & & \gamma & \alpha \end{bmatrix}$$</p>
+
+        <h4>证明</h4>
+        <p>LU 分解中，$L$ 仅有主对角线和下一条副对角线非零，$U$ 仅有主对角线和上一条副对角线非零。</p>
+
+        <div class="step">
+          <div class="step-label">递推公式</div>
+          <p>$U$ 的上副对角线：$u_{i,i+1} = \beta$（直接保留），$i = 1, \ldots, n-1$</p>
+          <p>$U$ 的对角线：$u_{1,1} = \alpha$，且对 $i \ge 2$：
+          $$u_{i,i} = \alpha - \frac{\beta \gamma}{u_{i-1,i-1}}$$</p>
+          <p>$L$ 的下副对角线：对 $i \ge 2$：
+          $$\ell_{i,i-1} = \frac{\gamma}{u_{i-1,i-1}}$$</p>
+          <p>$L$ 的对角线：$\ell_{i,i} = 1$</p>
+        </div>
+
+        <h4>运算量分析</h4>
+        <p>每步递推只涉及常数次运算（1次除法 + 1次乘法 + 1次减法），共 $n-1$ 步。因此总运算量为 $O(n)$。</p>
+
+        <h4>验证 $A = LU$</h4>
+        <p>考虑 $(LU)_{i,i}$：</p>
+        <p>$$\ell_{i,i} \cdot u_{i,i} + \ell_{i,i-1} \cdot u_{i-1,i} = u_{i,i} + \frac{\gamma}{u_{i-1,i-1}} \cdot \beta$$</p>
+        <p>由递推：$u_{i,i} = \alpha - \frac{\beta\gamma}{u_{i-1,i-1}}$，所以上式 $= \alpha$。✓</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Python — 三对角 LU 分解</span>
+            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          </div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">tridiag_lu</span>(alpha, beta, gamma, n):
+    <span class="str">"""三对角矩阵 LU 分解，O(n) 复杂度"""</span>
+    u_diag = np.zeros(n)
+    l_sub = np.zeros(n - <span class="num">1</span>)
+    u_diag[<span class="num">0</span>] = alpha
+    <span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1</span>, n):
+        l_sub[i-<span class="num">1</span>] = gamma / u_diag[i-<span class="num">1</span>]
+        u_diag[i] = alpha - beta * gamma / u_diag[i-<span class="num">1</span>]
+    <span class="kw">return</span> l_sub, u_diag
+
+<span class="cm"># 示例</span>
+l_sub, u_diag = <span class="fn">tridiag_lu</span>(<span class="num">4.0</span>, <span class="num">1.0</span>, <span class="num">1.0</span>, <span class="num">5</span>)
+<span class="fn">print</span>(<span class="str">"U diagonal:"</span>, u_diag)
+<span class="fn">print</span>(<span class="str">"L sub-diagonal:"</span>, l_sub)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cholesky -->
+    <div class="question-card" id="q2-cholesky">
+      <div class="question-header">
+        <span class="question-id">Q2(c) — Cholesky 分解</span>
+        <div class="question-tags"><span class="badge badge-year">2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Under what conditions does the Cholesky decomposition $A = R^T R$ exist? Show that $\|A\|_2 = \|R\|_2^2$. What is the $LDL^T$ decomposition?</div>
+        <div class="zh">Cholesky 分解 $A = R^T R$ 存在的条件是什么？证明 $\|A\|_2 = \|R\|_2^2$。$LDL^T$ 分解是什么？</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Cholesky 分解存在条件</h4>
+        <div class="theorem-card">
+          <div class="theorem-title">Cholesky 分解定理</div>
+          <p>$A = R^T R$（$R$ 为上三角矩阵）当且仅当 $A$ 是<strong>对称正定</strong>的（即 $A = A^T$ 且对所有 $x \ne 0$ 有 $x^T A x > 0$）。</p>
+        </div>
+
+        <p><strong>反例：</strong>矩阵 $A = \begin{bmatrix} 1 & 2 \\ 2 & 1 \end{bmatrix}$ 是对称的但不正定（特征值为 $3$ 和 $-1$），因此 Cholesky 分解不存在。</p>
+
+        <h4>证明 $\|A\|_2 = \|R\|_2^2$</h4>
+        <p>$\|A\|_2 = \|R^T R\|_2 = \sigma_{\max}(R^T R)$。</p>
+        <p>而 $R^T R$ 的特征值就是 $R$ 的奇异值的平方。因此 $\sigma_{\max}(R^T R) = \sigma_{\max}(R)^2 = \|R\|_2^2$。$\blacksquare$</p>
+
+        <h4>$LDL^T$ 分解</h4>
+        <p>对于一般对称非奇异矩阵 $A$（不必正定），可以分解为 $A = LDL^T$，其中 $L$ 是对角为 1 的下三角矩阵，$D$ 是对角矩阵。</p>
+        <p>由 LU 分解出发：若 $A = \hat{L}U$，由对称性 $A = A^T = U^T \hat{L}^T$，利用唯一性可得 $U = D\hat{L}^T$，其中 $D = \text{diag}(u_{11}, \ldots, u_{nn})$。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 3: Least Squares                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic3">
+    <h2 class="topic-title">三 · 最小二乘问题</h2>
+    <p class="topic-desc">正规方程、SVD 求解、QR 分解求解、增广系统、Givens 旋转</p>
+
+    <!-- Normal equations -->
+    <div class="question-card" id="q3a">
+      <div class="question-header">
+        <span class="question-id">Q3(a) — 正规方程</span>
+        <div class="question-tags">
+          <span class="badge badge-year">所有年份</span>
+          <span class="badge badge-topic">核心</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $A \in \mathbb{R}^{m \times n}$, $m \ge n$, $\text{rank}(A)=n$, $b \in \mathbb{R}^m$. Find $\hat{x}$ minimizing $\|A\hat{x}-b\|_2$. Show that $A^TA\hat{x} = A^Tb$ is necessary and sufficient.</div>
+        <div class="zh">证明 $A^TA\hat{x} = A^Tb$（正规方程）是最小二乘问题 $\min_x \|Ax-b\|_2$ 的充要条件。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>定义 $\phi(x) = \|Ax - b\|_2^2 = (Ax-b)^T(Ax-b) = x^TA^TAx - 2b^TAx + b^Tb$。</p>
+
+        <div class="step">
+          <div class="step-label">必要条件（取梯度）</div>
+          <p>$$\nabla_x \phi = 2A^TAx - 2A^Tb = 0$$</p>
+          <p>$$\Rightarrow A^TA\hat{x} = A^Tb$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">充分性</div>
+          <p>对任意 $x \in \mathbb{R}^n$，令 $x = \hat{x} + v$：</p>
+          <p>$$\|Ax - b\|_2^2 = \|A\hat{x} - b + Av\|_2^2 = \|A\hat{x}-b\|_2^2 + 2(A\hat{x}-b)^TAv + \|Av\|_2^2$$</p>
+          <p>由正规方程，$A^T(A\hat{x}-b) = 0$，故交叉项 $= 2(A\hat{x}-b)^TAv = 0$。</p>
+          <p>因此 $\|Ax-b\|_2^2 = \|A\hat{x}-b\|_2^2 + \|Av\|_2^2 \ge \|A\hat{x}-b\|_2^2$。$\blacksquare$</p>
+        </div>
+
+        <div class="theorem-card">
+          <div class="theorem-title">几何解释</div>
+          <p>正规方程 $A^T(A\hat{x}-b) = 0$ 意味着残差 $r = b - A\hat{x}$ 与 $A$ 的列空间正交。$\hat{x}$ 使 $A\hat{x}$ 成为 $b$ 在 $\text{Col}(A)$ 上的正交投影。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Augmented system -->
+    <div class="question-card" id="q3b">
+      <div class="question-header">
+        <span class="question-id">Q3(b) — 增广系统</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Show that $\hat{x}$ is also given by the solution of:
+$$\begin{bmatrix} I & A \\ A^T & 0 \end{bmatrix}\begin{bmatrix} y \\ \hat{x} \end{bmatrix} = \begin{bmatrix} b \\ 0 \end{bmatrix}$$
+What is the interpretation of $y$?</div>
+        <div class="zh">证明增广系统也给出最小二乘解。$y$ 的含义是什么？</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>展开增广系统：</p>
+        <p>第一行：$y + A\hat{x} = b \Rightarrow y = b - A\hat{x}$</p>
+        <p>第二行：$A^T y = 0$</p>
+        <p>将第一行代入第二行：$A^T(b - A\hat{x}) = 0 \Rightarrow A^TA\hat{x} = A^Tb$</p>
+        <p>这正是正规方程！$\blacksquare$</p>
+
+        <h4>$y$ 的解释</h4>
+        <p>$y = b - A\hat{x}$ 就是<strong>残差向量</strong>（residual），即 $b$ 与其在 $A$ 列空间上投影的差。$A^Ty = 0$ 表明残差与列空间正交。</p>
+      </div>
+    </div>
+
+    <!-- SVD solution -->
+    <div class="question-card" id="q3-svd">
+      <div class="question-header">
+        <span class="question-id">Q3(c) — SVD 求解</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/Mock</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $A = U\Sigma V^T$ be the SVD. Show that $\hat{x} = V(\Sigma^T\Sigma)^{-1}\Sigma^T U^T b$ and $\|\hat{x}\|_2 \le \sigma_n^{-1}\|b\|_2$.</div>
+        <div class="zh">利用 SVD 求解最小二乘并给出解的范数估计。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>SVD 求解</h4>
+        <p>将 $A = U\Sigma V^T$ 代入正规方程 $A^TA\hat{x} = A^Tb$：</p>
+        <p>$$V\Sigma^T U^T U \Sigma V^T \hat{x} = V\Sigma^T U^T b$$</p>
+        <p>由 $U$ 正交，$U^TU = I$：</p>
+        <p>$$V\Sigma^T\Sigma V^T \hat{x} = V\Sigma^T U^T b$$</p>
+        <p>左乘 $V^T$（$V$ 正交）：</p>
+        <p>$$\Sigma^T\Sigma V^T\hat{x} = \Sigma^T U^T b$$</p>
+        <p>因此：$\hat{x} = V(\Sigma^T\Sigma)^{-1}\Sigma^T U^T b$</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">伪逆 (Moore-Penrose Pseudoinverse)</div>
+          <p>$A^\dagger = V\Sigma^\dagger U^T$，其中 $\Sigma^\dagger$ 是将 $\Sigma$ 中非零奇异值取倒数、转置得到的矩阵。$\hat{x} = A^\dagger b$。</p>
+        </div>
+
+        <h4>范数估计</h4>
+        <p>$$\|\hat{x}\|_2 = \|V(\Sigma^T\Sigma)^{-1}\Sigma^T U^T b\|_2$$</p>
+        <p>$V$ 正交保范数，$(\Sigma^T\Sigma)^{-1}\Sigma^T$ 的最大奇异值为 $\sigma_n^{-1}$（$\sigma_n$ 是 $A$ 的最小奇异值），$U^T$ 保范数，因此：</p>
+        <p>$$\|\hat{x}\|_2 \le \sigma_n^{-1}\|b\|_2 \qquad \blacksquare$$</p>
+      </div>
+    </div>
+
+    <!-- QR solution -->
+    <div class="question-card" id="q3-qr">
+      <div class="question-header">
+        <span class="question-id">Q3(c) — QR 求解</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Mock/2014/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Use the normal equation to show that $\hat{x} = R^{-1}Q^Tb$ where $A = QR$ is the reduced QR factorization.</div>
+        <div class="zh">利用正规方程证明：通过 QR 分解可得 $\hat{x} = R^{-1}Q^Tb$。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>设 $A = QR$ 为约化 QR 分解，$Q \in \mathbb{R}^{m \times n}$ 列正交，$R \in \mathbb{R}^{n \times n}$ 上三角。</p>
+        <p>代入正规方程 $A^TA\hat{x} = A^Tb$：</p>
+        <p>$$R^TQ^TQR\hat{x} = R^TQ^Tb$$</p>
+        <p>$Q$ 列正交故 $Q^TQ = I_n$：</p>
+        <p>$$R^TR\hat{x} = R^TQ^Tb$$</p>
+        <p>$R$ 非奇异（因 $\text{rank}(A) = n$），$R^T$ 也非奇异，两边左乘 $(R^T)^{-1}$：</p>
+        <p>$$R\hat{x} = Q^Tb \quad \Rightarrow \quad \hat{x} = R^{-1}Q^Tb \qquad \blacksquare$$</p>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Python — QR 最小二乘</span>
+            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          </div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># 超定系统 Ax ≈ b</span>
+A = np.array([[<span class="num">1</span>, <span class="num">1</span>], [<span class="num">1</span>, <span class="num">2</span>], [<span class="num">1</span>, <span class="num">3</span>]], dtype=<span class="str">'float'</span>)
+b = np.array([<span class="num">1</span>, <span class="num">2.1</span>, <span class="num">2.9</span>])
+
+<span class="cm"># 方法1: QR 分解</span>
+Q, R = np.linalg.<span class="fn">qr</span>(A, mode=<span class="str">'reduced'</span>)
+x_qr = np.linalg.<span class="fn">solve</span>(R, Q.T @ b)
+
+<span class="cm"># 方法2: lstsq</span>
+x_ls, res, _, _ = np.linalg.<span class="fn">lstsq</span>(A, b, rcond=<span class="kw">None</span>)
+
+<span class="fn">print</span>(<span class="str">"QR solution:"</span>, x_qr)
+<span class="fn">print</span>(<span class="str">"lstsq:"</span>, x_ls)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Givens rotation -->
+    <div class="question-card" id="q3-givens">
+      <div class="question-header">
+        <span class="question-id">Q3(c) — Givens 旋转</span>
+        <div class="question-tags"><span class="badge badge-year">2013</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Define Givens rotation $G(\theta)$. Show it is orthogonal. Given $v = [x, y]^T \ne 0$, show $G(\theta)v = [\sqrt{x^2+y^2}, 0]^T$.</div>
+        <div class="zh">定义 Givens 旋转矩阵，证明其正交性，并说明如何将二维向量旋转到坐标轴上。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Givens 旋转矩阵</h4>
+        <p>$$G(\theta) = \begin{bmatrix} c & s \\ -s & c \end{bmatrix}, \quad c = \cos\theta,\ s = \sin\theta$$</p>
+
+        <h4>正交性证明</h4>
+        <p>$$G(\theta)^T G(\theta) = \begin{bmatrix} c & -s \\ s & c \end{bmatrix}\begin{bmatrix} c & s \\ -s & c \end{bmatrix} = \begin{bmatrix} c^2+s^2 & cs-sc \\ sc-cs & s^2+c^2 \end{bmatrix} = I$$</p>
+        <p>因此 $G(\theta)^T = G(\theta)^{-1}$，$G$ 是正交矩阵。$\blacksquare$</p>
+
+        <h4>消去第二分量</h4>
+        <p>给定 $v = [x, y]^T \ne 0$，取 $c = \frac{x}{\sqrt{x^2+y^2}}$，$s = \frac{y}{\sqrt{x^2+y^2}}$，则：</p>
+        <p>$$G(\theta)v = \begin{bmatrix} c & s \\ -s & c \end{bmatrix}\begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} cx + sy \\ -sx + cy \end{bmatrix}$$</p>
+        <p>第一分量：$\frac{x^2+y^2}{\sqrt{x^2+y^2}} = \sqrt{x^2+y^2}$</p>
+        <p>第二分量：$\frac{-xy+xy}{\sqrt{x^2+y^2}} = 0$ $\qquad\blacksquare$</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 4: Eigenvalues                        -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic4">
+    <h2 class="topic-title">四 · 特征值与特征向量</h2>
+    <p class="topic-desc">幂迭代、Rayleigh 商迭代、Gershgorin 圆盘、特征值扰动、Schur 分解</p>
+
+    <!-- Power iteration -->
+    <div class="question-card" id="q4a">
+      <div class="question-header">
+        <span class="question-id">Q4(a) — 幂迭代</span>
+        <div class="question-tags">
+          <span class="badge badge-year">所有年份</span>
+          <span class="badge badge-topic">核心</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">Write down the power iteration to compute the largest magnitude eigenvalue of $A \in \mathbb{R}^{n \times n}$.</div>
+        <div class="zh">写出求矩阵最大模特征值的幂迭代算法。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>幂迭代算法</h4>
+        <div class="step">
+          <div class="step-label">Algorithm: Power Iteration</div>
+          <p>输入：矩阵 $A \in \mathbb{R}^{n \times n}$，初始向量 $v^{(0)}$（$\|v^{(0)}\|=1$）</p>
+          <p>对 $k = 1, 2, \ldots$：</p>
+          <p>&emsp;1. $w^{(k)} = Av^{(k-1)}$</p>
+          <p>&emsp;2. $v^{(k)} = w^{(k)} / \|w^{(k)}\|$</p>
+          <p>&emsp;3. $\lambda^{(k)} = (v^{(k)})^T A v^{(k)}$（Rayleigh 商）</p>
+          <p>输出：$\lambda^{(k)} \to \lambda_1$（最大模特征值），$v^{(k)} \to v_1$（对应特征向量）</p>
+        </div>
+
+        <div class="theorem-card">
+          <div class="theorem-title">收敛性</div>
+          <p>设 $|\lambda_1| > |\lambda_2| \ge \cdots \ge |\lambda_n|$，则收敛速度为 $O(|\lambda_2/\lambda_1|^k)$。要求 $v^{(0)}$ 在 $\lambda_1$ 对应特征向量方向上有非零分量。</p>
+        </div>
+
+        <div class="code-block">
+          <div class="code-header">
+            <span>Python — 幂迭代</span>
+            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+          </div>
+<pre><code><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="kw">def</span> <span class="fn">power_iteration</span>(A, num_iter=<span class="num">100</span>, tol=<span class="num">1e-10</span>):
+    n = A.shape[<span class="num">0</span>]
+    v = np.random.randn(n)
+    v = v / np.linalg.norm(v)
+    <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(num_iter):
+        w = A @ v
+        v_new = w / np.linalg.norm(w)
+        lam = v_new @ A @ v_new
+        <span class="kw">if</span> np.linalg.norm(v_new - v) < tol:
+            <span class="kw">break</span>
+        v = v_new
+    <span class="kw">return</span> lam, v
+
+A = np.array([[<span class="num">2</span>, <span class="num">1</span>], [<span class="num">1</span>, <span class="num">3</span>]], dtype=<span class="str">'float'</span>)
+lam, v = <span class="fn">power_iteration</span>(A)
+<span class="fn">print</span>(<span class="str">f"最大特征值: {lam:.6f}"</span>)
+<span class="fn">print</span>(<span class="str">f"NumPy 验证: {np.linalg.eigvals(A).max():.6f}"</span>)
+</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rayleigh quotient iteration -->
+    <div class="question-card" id="q4b">
+      <div class="question-header">
+        <span class="question-id">Q4(b) — Rayleigh 商迭代</span>
+        <div class="question-tags"><span class="badge badge-year">所有年份</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Formulate the Rayleigh quotient iteration for a symmetric matrix $A$ and state its order of convergence.</div>
+        <div class="zh">给出对称矩阵的 Rayleigh 商迭代算法及其收敛阶。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Rayleigh 商迭代</h4>
+        <div class="step">
+          <div class="step-label">Algorithm</div>
+          <p>输入：对称矩阵 $A$，初始向量 $v^{(0)}$（$\|v^{(0)}\|=1$）</p>
+          <p>$\sigma^{(0)} = (v^{(0)})^T A v^{(0)}$</p>
+          <p>对 $k = 1, 2, \ldots$：</p>
+          <p>&emsp;1. 求解 $(A - \sigma^{(k-1)}I)w^{(k)} = v^{(k-1)}$</p>
+          <p>&emsp;2. $v^{(k)} = w^{(k)} / \|w^{(k)}\|$</p>
+          <p>&emsp;3. $\sigma^{(k)} = (v^{(k)})^T A v^{(k)}$（更新 Rayleigh 商）</p>
+        </div>
+
+        <div class="theorem-card">
+          <div class="theorem-title">收敛阶</div>
+          <p>对称矩阵的 Rayleigh 商迭代具有<strong>三次（cubic）收敛</strong>速度，即误差满足 $|\sigma^{(k+1)} - \lambda| = O(|\sigma^{(k)} - \lambda|^3)$。这比普通反幂迭代（线性收敛）和带固定位移的反幂迭代（线性收敛）快得多。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rayleigh quotient stationary points -->
+    <div class="question-card" id="q4c">
+      <div class="question-header">
+        <span class="question-id">Q4(c) — Rayleigh 商性质</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/Mock/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $\lambda$ be a simple eigenvalue of symmetric $A$ with eigenvector $x$, and $\tilde{x} = x + \epsilon$. Show that $\frac{\tilde{x}^H A \tilde{x}}{\tilde{x}^H \tilde{x}} = \lambda + O(\|\epsilon\|^2)$.</div>
+        <div class="zh">证明特征向量是 Rayleigh 商的驻点，并说明 Rayleigh 商在特征向量附近具有二阶精度。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>设 $Ax = \lambda x$，$\|x\| = 1$。定义 $r(v) = \frac{v^H A v}{v^H v}$。</p>
+
+        <div class="step">
+          <div class="step-label">Step 1：展开分子</div>
+          <p>$$\tilde{x}^H A \tilde{x} = (x+\epsilon)^H A (x+\epsilon) = x^HAx + \epsilon^HAx + x^HA\epsilon + \epsilon^HA\epsilon$$</p>
+          <p>$$= \lambda + \lambda\epsilon^Hx + \lambda x^H\epsilon + \epsilon^HA\epsilon = \lambda + 2\lambda\text{Re}(x^H\epsilon) + O(\|\epsilon\|^2)$$</p>
+          <p>（利用 $A$ 对称 $\Rightarrow$ $x^HA\epsilon = \lambda x^H\epsilon$ 和 $\epsilon^HAx = \lambda\epsilon^Hx$）</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Step 2：展开分母</div>
+          <p>$$\tilde{x}^H \tilde{x} = 1 + \epsilon^Hx + x^H\epsilon + \|\epsilon\|^2 = 1 + 2\text{Re}(x^H\epsilon) + O(\|\epsilon\|^2)$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">Step 3：相除</div>
+          <p>$$r(\tilde{x}) = \frac{\lambda(1 + 2\text{Re}(x^H\epsilon)) + O(\|\epsilon\|^2)}{1 + 2\text{Re}(x^H\epsilon) + O(\|\epsilon\|^2)} = \lambda + O(\|\epsilon\|^2) \qquad\blacksquare$$</p>
+        </div>
+
+        <p>这说明 Rayleigh 商在特征向量处是<strong>驻点</strong>，且以二阶精度逼近特征值——即使特征向量有 $O(\epsilon)$ 误差，Rayleigh 商的误差只有 $O(\epsilon^2)$。</p>
+      </div>
+    </div>
+
+    <!-- Gershgorin -->
+    <div class="question-card" id="q4d">
+      <div class="question-header">
+        <span class="question-id">Q4(d) — Gershgorin 圆盘定理</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/2014/2015</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Show that the eigenvalues of $A$ lie in the union of disks $R_i := \{|z - a_{ii}| \le \sum_{j \ne i} |a_{ij}|\}$.</div>
+        <div class="zh">证明 Gershgorin 圆盘定理：所有特征值都在 Gershgorin 圆盘的并集内。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <div class="theorem-card">
+          <div class="theorem-title">Gershgorin Circle Theorem</div>
+          <p>矩阵 $A$ 的每一个特征值 $\lambda$ 都位于至少一个圆盘 $R_i = \{z \in \mathbb{C} : |z - a_{ii}| \le \sum_{j=1, j\ne i}^n |a_{ij}|\}$ 内。</p>
+        </div>
+
+        <h4>证明</h4>
+        <p>设 $Ax = \lambda x$，$x \ne 0$。取 $i$ 为 $|x_i|$ 最大的分量的下标（即 $|x_i| = \|x\|_\infty$）。</p>
+
+        <p>考虑 $Ax = \lambda x$ 的第 $i$ 行：</p>
+        <p>$$\sum_{j=1}^n a_{ij}x_j = \lambda x_i$$</p>
+        <p>$$a_{ii}x_i + \sum_{j \ne i} a_{ij}x_j = \lambda x_i$$</p>
+        <p>$$(\lambda - a_{ii})x_i = \sum_{j \ne i} a_{ij}x_j$$</p>
+
+        <p>两边取模：</p>
+        <p>$$|\lambda - a_{ii}| \cdot |x_i| \le \sum_{j \ne i} |a_{ij}| \cdot |x_j| \le \sum_{j \ne i} |a_{ij}| \cdot |x_i|$$</p>
+
+        <p>因为 $|x_i| > 0$，两边除以 $|x_i|$：</p>
+        <p>$$|\lambda - a_{ii}| \le \sum_{j=1, j \ne i}^n |a_{ij}| \qquad\blacksquare$$</p>
+
+        <h4>推论：严格对角占优矩阵非奇异</h4>
+        <p>若 $|a_{ii}| > \sum_{j \ne i} |a_{ij}|$ 对所有 $i$ 成立，则所有 Gershgorin 圆盘不包含原点，因此 $\lambda = 0$ 不是特征值，矩阵非奇异。</p>
+
+        <!-- Interactive Gershgorin -->
+        <div class="viz-container" id="gershgorin-viz">
+          <canvas id="gershCanvas" width="500" height="500"></canvas>
+          <div class="viz-controls">
+            <button class="viz-btn active" onclick="drawGershgorin(1)">示例 1</button>
+            <button class="viz-btn" onclick="drawGershgorin(2)">示例 2</button>
+            <button class="viz-btn" onclick="drawGershgorin(3)">对角占优</button>
+          </div>
+          <p style="font-size:0.78rem;color:var(--text-muted);margin-top:8px;">🔵 Gershgorin 圆盘 · 🔴 实际特征值</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Eigenvalue perturbation -->
+    <div class="question-card" id="q4-perturb">
+      <div class="question-header">
+        <span class="question-id">Q4(a/c) — 特征值扰动</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $\lambda$ be a simple eigenvalue of $A$ and $\lambda + \delta\lambda$ the corresponding eigenvalue of $A + \delta A$. Show to first order: $\delta\lambda = \frac{y^H \delta A\, x}{y^H x}$.</div>
+        <div class="zh">对于简单特征值的一阶扰动，证明 $\delta\lambda = y^H \delta A\, x / y^H x$（$x$：右特征向量，$y$：左特征向量）。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>从扰动方程出发：$(A + \delta A)(x + \delta x) = (\lambda + \delta\lambda)(x + \delta x)$</p>
+        <p>展开（忽略二阶小量 $\delta A \cdot \delta x$ 和 $\delta\lambda \cdot \delta x$）：</p>
+        <p>$$Ax + A\delta x + \delta A \cdot x = \lambda x + \lambda\delta x + \delta\lambda \cdot x$$</p>
+        <p>利用 $Ax = \lambda x$ 消去：</p>
+        <p>$$A\delta x + \delta A \cdot x = \lambda\delta x + \delta\lambda \cdot x$$</p>
+        <p>两边左乘左特征向量 $y^H$（满足 $y^H A = \lambda y^H$）：</p>
+        <p>$$y^H A\delta x + y^H\delta A\cdot x = \lambda y^H\delta x + \delta\lambda \cdot y^H x$$</p>
+        <p>因为 $y^HA = \lambda y^H$，所以 $y^HA\delta x = \lambda y^H\delta x$，对消得：</p>
+        <p>$$y^H\delta A\cdot x = \delta\lambda \cdot y^Hx$$</p>
+        <p>$$\boxed{\delta\lambda = \frac{y^H\delta A\cdot x}{y^H x}} \qquad\blacksquare$$</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">对称矩阵的简化</div>
+          <p>对称矩阵的左右特征向量相同（$y = x$），因此 $\delta\lambda = \frac{x^H\delta A\, x}{x^Hx} = x^H\delta A\, x$（归一化情形）。这意味着对称矩阵的特征值总是 well-conditioned 的。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Schur decomposition -->
+    <div class="question-card" id="q4-schur">
+      <div class="question-header">
+        <span class="question-id">Q4(b) — Schur 分解</span>
+        <div class="question-tags"><span class="badge badge-year">2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Prove that every square matrix $A \in \mathbb{C}^{n \times n}$ has a Schur decomposition $A = QTQ^H$ where $Q$ is unitary and $T$ is upper triangular.</div>
+        <div class="zh">证明每个方阵都有 Schur 分解。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>归纳法证明</h4>
+
+        <div class="step">
+          <div class="step-label">基础：$n = 1$</div>
+          <p>$A = [\lambda]$ 已经是上三角，$Q = [1]$。✓</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">归纳步骤</div>
+          <p>设结论对 $n-1$ 阶矩阵成立。设 $\lambda_1$ 是 $A$ 的特征值，$q_1$ 是归一化特征向量。</p>
+          <p>将 $q_1$ 扩展为酉基 $\hat{Q} = [q_1 \mid Q_\perp]$，则：</p>
+          <p>$$\hat{Q}^H A \hat{Q} = \begin{bmatrix} \lambda_1 & b^H \\ 0 & A' \end{bmatrix}$$</p>
+          <p>其中第一列的结果来自 $Aq_1 = \lambda_1 q_1$，$A' \in \mathbb{C}^{(n-1)\times(n-1)}$。</p>
+          <p>由归纳假设，$A' = \tilde{Q}\tilde{T}\tilde{Q}^H$，$\tilde{Q}$ 酉，$\tilde{T}$ 上三角。</p>
+          <p>令 $Q = \hat{Q}\begin{bmatrix} 1 & 0 \\ 0 & \tilde{Q}\end{bmatrix}$，则 $Q^HAQ$ 为上三角。$\blacksquare$</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 5: Interpolation                      -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic5">
+    <h2 class="topic-title">五 · 多项式插值</h2>
+    <p class="topic-desc">Lagrange 插值、唯一性、Neville 递推、Runge 现象、最佳逼近</p>
+
+    <!-- Lagrange interpolation -->
+    <div class="question-card" id="q5a">
+      <div class="question-header">
+        <span class="question-id">Q5(a) — Lagrange 插值</span>
+        <div class="question-tags">
+          <span class="badge badge-year">所有年份</span>
+          <span class="badge badge-topic">核心</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">Write down the Lagrange interpolation polynomial of degree $n$ that interpolates $f$ in the points $x_0, \ldots, x_n$.</div>
+        <div class="zh">写出过 $n+1$ 个点的 $n$ 次 Lagrange 插值多项式。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Lagrange 插值公式</h4>
+        <p>$$p(x) = \sum_{k=0}^n f(x_k) L_k(x)$$</p>
+        <p>其中 Lagrange 基多项式为：</p>
+        <p>$$L_k(x) = \prod_{\substack{j=0 \\ j \ne k}}^n \frac{x - x_j}{x_k - x_j}$$</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">关键性质</div>
+          <p>$L_k(x_i) = \delta_{ki}$（在 $x_k$ 处为 1，在其他节点处为 0）。因此 $p(x_k) = f(x_k)$ 对所有 $k$ 成立。</p>
+        </div>
+
+        <!-- Interactive interpolation -->
+        <div class="viz-container" id="interp-viz">
+          <canvas id="interpCanvas" width="600" height="350"></canvas>
+          <div class="viz-controls">
+            <label style="font-size:0.82rem;color:var(--text-secondary);">
+              节点数 n+1 = <span id="nNodesLabel">4</span>
+            </label>
+            <input type="range" id="nNodesSlider" min="2" max="12" value="4" oninput="updateInterp()">
+            <button class="viz-btn" onclick="toggleRunge()">显示 Runge 现象</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Uniqueness -->
+    <div class="question-card" id="q5b-unique">
+      <div class="question-header">
+        <span class="question-id">Q5(b) — 插值唯一性</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Mock/2015</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Show that there exists exactly one polynomial $p$ of degree $\le N$ such that $p(x_j) = y_j$ for $j = 0, \ldots, N$.</div>
+        <div class="zh">证明满足 $N+1$ 个插值条件的不超过 $N$ 次多项式是唯一的。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>存在性</h4>
+        <p>Lagrange 插值公式显式构造了这样一个多项式，因此存在性成立。</p>
+
+        <h4>唯一性（反证法）</h4>
+        <p>假设 $p$ 和 $q$ 都是不超过 $N$ 次的多项式且在所有节点处相等。</p>
+        <p>令 $r(x) = p(x) - q(x)$，则 $r$ 的次数 $\le N$，且 $r(x_j) = 0$ 对 $j = 0, \ldots, N$ 成立。</p>
+        <p>一个不超过 $N$ 次的多项式有 $N+1$ 个零点，而不超过 $N$ 次的非零多项式最多有 $N$ 个零点。矛盾。</p>
+        <p>因此 $r \equiv 0$，即 $p \equiv q$。$\blacksquare$</p>
+      </div>
+    </div>
+
+    <!-- Neville recursive -->
+    <div class="question-card" id="q5c-neville">
+      <div class="question-header">
+        <span class="question-id">Q5(c) — Neville 递推</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/Mock/2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $q$ be the interpolation polynomial for $x_0, \ldots, x_N$ and $r$ for $x_1, \ldots, x_{N+1}$. Show:
+$$p(x) = \frac{(x-x_0)r(x) - (x-x_{N+1})q(x)}{x_{N+1} - x_0}$$
+is the interpolation polynomial for all $N+2$ points.</div>
+        <div class="zh">证明 Neville 递推公式：用两个低阶插值多项式构造高阶插值多项式。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>证明</h4>
+        <p>需验证 $p$ 的次数和插值条件。</p>
+
+        <div class="step">
+          <div class="step-label">次数检查</div>
+          <p>$q$ 和 $r$ 的次数均为 $N$。$(x-x_0)r(x)$ 和 $(x-x_{N+1})q(x)$ 的次数为 $N+1$。相减后除以常数，次数 $\le N+1$。✓</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">在 $x_0$ 处</div>
+          <p>$$p(x_0) = \frac{0 \cdot r(x_0) - (x_0-x_{N+1})q(x_0)}{x_{N+1}-x_0} = \frac{(x_{N+1}-x_0)y_0}{x_{N+1}-x_0} = y_0 \quad\checkmark$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">在 $x_{N+1}$ 处</div>
+          <p>$$p(x_{N+1}) = \frac{(x_{N+1}-x_0)r(x_{N+1}) - 0}{x_{N+1}-x_0} = r(x_{N+1}) = y_{N+1} \quad\checkmark$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">在 $x_i$（$1 \le i \le N$）处</div>
+          <p>$q(x_i) = y_i$，$r(x_i) = y_i$，因此：</p>
+          <p>$$p(x_i) = \frac{(x_i-x_0)y_i - (x_i-x_{N+1})y_i}{x_{N+1}-x_0} = y_i \cdot \frac{x_{N+1}-x_0}{x_{N+1}-x_0} = y_i \quad\checkmark$$</p>
+        </div>
+
+        <p>由唯一性，$p$ 就是过所有 $N+2$ 点的插值多项式。$\blacksquare$</p>
+
+        <h4>递推算法</h4>
+        <p>这给出了一种<strong>递推计算</strong>插值多项式值的方法（Neville 算法 / Aitken 算法）：从常数多项式（各点的值）出发，逐步合并相邻点集的插值多项式。</p>
+      </div>
+    </div>
+
+    <!-- Runge phenomenon -->
+    <div class="question-card" id="q5-runge">
+      <div class="question-header">
+        <span class="question-id">Q5(b) — Runge 现象</span>
+        <div class="question-tags"><span class="badge badge-year">2014</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Explain the Runge phenomenon and how it can be prevented.</div>
+        <div class="zh">解释 Runge 现象及其预防方法。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Runge 现象</h4>
+        <p>对某些函数（如 $f(x) = 1/(1+25x^2)$），使用<strong>等距节点</strong>的高次多项式插值时，随着次数增加，插值多项式在区间端点附近产生剧烈振荡，误差不减反增。</p>
+
+        <h4>预防方法</h4>
+        <p>使用 <strong>Chebyshev 节点</strong>（集中在端点附近）：</p>
+        <p>$$x_k = \cos\left(\frac{2k+1}{2(n+1)}\pi\right), \quad k = 0, \ldots, n$$</p>
+        <p>Chebyshev 节点使得节点多项式 $\omega(x) = \prod_{k}(x-x_k)$ 的最大模最小化，从而控制插值误差。</p>
+      </div>
+    </div>
+
+    <!-- Best approximation -->
+    <div class="question-card" id="q5-best">
+      <div class="question-header">
+        <span class="question-id">Q5(b) — 最佳逼近</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/Mock</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Give the definition of the best approximating polynomial and state the difference between interpolation and approximation.</div>
+        <div class="zh">定义最佳逼近多项式，并说明插值与逼近的区别。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>最佳逼近多项式</h4>
+        <p>$n$ 次最佳逼近多项式 $p^*$ 满足：</p>
+        <p>$$\|f - p^*\|_\infty = \min_{p \in \mathcal{P}_n} \|f - p\|_\infty = \min_{p \in \mathcal{P}_n} \max_{x \in [a,b]} |f(x) - p(x)|$$</p>
+
+        <h4>插值 vs 逼近</h4>
+        <p><strong>插值</strong>：要求多项式在有限个节点处精确等于函数值 $p(x_k) = f(x_k)$，但在其他点处可能有较大误差。</p>
+        <p><strong>逼近</strong>：不要求在任何特定点精确相等，而是在整个区间上最小化某种范数意义下的误差。逼近通常在全局意义上更好。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- TOPIC 6: Numerical Integration              -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section class="topic-section" id="topic6">
+    <h2 class="topic-title">六 · 数值求积</h2>
+    <p class="topic-desc">梯形法则、Newton-Cotes 公式、复合规则、Gauss 求积、三角域积分</p>
+
+    <!-- Trapezoid rule derivation -->
+    <div class="question-card" id="q6a">
+      <div class="question-header">
+        <span class="question-id">Q6(a) — 梯形法则</span>
+        <div class="question-tags">
+          <span class="badge badge-year">所有年份</span>
+          <span class="badge badge-topic">核心</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">Derive the Trapezoid rule for approximating $I(f) = \int_a^b f(x)\,dx$.</div>
+        <div class="zh">推导梯形法则。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>推导</h4>
+        <p>用 $a$ 和 $b$ 两点的线性插值来近似 $f$：</p>
+        <p>$$p_1(x) = f(a) \cdot \frac{b-x}{b-a} + f(b) \cdot \frac{x-a}{b-a}$$</p>
+        <p>积分：</p>
+        <p>$$I_1(f) = \int_a^b p_1(x)\,dx = f(a)\int_a^b \frac{b-x}{b-a}dx + f(b)\int_a^b\frac{x-a}{b-a}dx$$</p>
+
+        <div class="step">
+          <div class="step-label">计算权重</div>
+          <p>$$\int_a^b \frac{b-x}{b-a}dx = \frac{1}{b-a}\left[bx - \frac{x^2}{2}\right]_a^b = \frac{b-a}{2}$$</p>
+          <p>同理，$\int_a^b \frac{x-a}{b-a}dx = \frac{b-a}{2}$</p>
+        </div>
+
+        <p>因此<strong>梯形法则</strong>为：</p>
+        <p>$$\boxed{I_1(f) = \frac{b-a}{2}[f(a) + f(b)]}$$</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">误差估计</div>
+          <p>$$|I(f) - I_1(f)| \le \frac{(b-a)^3}{12}M_2, \quad M_2 = \max_{x \in [a,b]}|f''(x)|$$</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newton-Cotes general -->
+    <div class="question-card" id="q6b">
+      <div class="question-header">
+        <span class="question-id">Q6(b) — Newton-Cotes</span>
+        <div class="question-tags"><span class="badge badge-year">所有年份</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">What is the general form of Newton-Cotes quadrature rules?</div>
+        <div class="zh">写出 Newton-Cotes 求积公式的一般形式。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>一般形式</h4>
+        <p>取 $[a,b]$ 上的 $n+1$ 个等距节点 $x_k = a + kh$（$h = (b-a)/n$，$k = 0, \ldots, n$）。</p>
+        <p>$$I_n(f) = \sum_{k=0}^n w_k f(x_k)$$</p>
+        <p>权重通过对 Lagrange 基多项式积分得到：</p>
+        <p>$$w_k = \int_a^b L_k(x)\,dx$$</p>
+
+        <p>常见实例：$n=1$ 梯形法则，$n=2$ Simpson 法则。</p>
+
+        <h4>误差公式</h4>
+        <p>$$|I(f) - I_n(f)| \le C_n \cdot h^{n+2} \cdot \max|f^{(n+1)}|$$</p>
+        <p>（$n$ 为奇数时自动获得额外一阶精度）</p>
+      </div>
+    </div>
+
+    <!-- Simpson derivation -->
+    <div class="question-card" id="q6-simpson">
+      <div class="question-header">
+        <span class="question-id">Q6(d) — Simpson 法则推导</span>
+        <div class="question-tags"><span class="badge badge-year">2014/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Derive the weights $\omega_0, \omega_1, \omega_2$ for the Newton-Cotes rule $I_2(f) = \omega_0 f(a) + \omega_1 f(\frac{a+b}{2}) + \omega_2 f(b)$.</div>
+        <div class="zh">推导 Simpson 法则的权重。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>推导</h4>
+        <p>要求公式对 $f = 1, x, x^2$ 精确（3个未知数，3个方程）。设 $a = 0$，$b = 1$（不失一般性），中点 $= 1/2$。</p>
+
+        <div class="step">
+          <div class="step-label">$f = 1$</div>
+          <p>$$\int_0^1 1\,dx = 1 = \omega_0 + \omega_1 + \omega_2$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">$f = x$</div>
+          <p>$$\int_0^1 x\,dx = \frac{1}{2} = 0 \cdot \omega_0 + \frac{1}{2}\omega_1 + 1 \cdot \omega_2$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">$f = x^2$</div>
+          <p>$$\int_0^1 x^2\,dx = \frac{1}{3} = 0 \cdot \omega_0 + \frac{1}{4}\omega_1 + 1 \cdot \omega_2$$</p>
+        </div>
+
+        <p>由第2、3个方程：$\frac{1}{2}\omega_1 + \omega_2 = \frac{1}{2}$ 且 $\frac{1}{4}\omega_1 + \omega_2 = \frac{1}{3}$</p>
+        <p>相减：$\frac{1}{4}\omega_1 = \frac{1}{6} \Rightarrow \omega_1 = \frac{2}{3}$</p>
+        <p>$\omega_2 = \frac{1}{2} - \frac{1}{3} = \frac{1}{6}$</p>
+        <p>$\omega_0 = 1 - \frac{2}{3} - \frac{1}{6} = \frac{1}{6}$</p>
+
+        <p>对一般区间 $[a,b]$，乘以 $(b-a)$：</p>
+        <p>$$\boxed{I_2(f) = \frac{b-a}{6}\left[f(a) + 4f\left(\frac{a+b}{2}\right) + f(b)\right]}$$</p>
+        <p>这就是 <strong>Simpson 法则</strong>。</p>
+      </div>
+    </div>
+
+    <!-- Gaussian 2-point -->
+    <div class="question-card" id="q6d">
+      <div class="question-header">
+        <span class="question-id">Q6(d) — 两点 Gauss 求积</span>
+        <div class="question-tags">
+          <span class="badge badge-year">2013 Resit/Mock/2015/2017</span>
+          <span class="badge badge-topic">核心</span>
+        </div>
+      </div>
+      <div class="question-body">
+        <div class="en">A quadrature formula on $[-1,1]$ uses points $x_0 = -\alpha$, $x_1 = \alpha$:
+$$\int_{-1}^1 f(x)dx \approx w_0 f(-\alpha) + w_1 f(\alpha)$$
+Show $w_0 = w_1 = 1$. Find $\alpha$ such that the formula is also exact for degree 2 and 3 polynomials.</div>
+        <div class="zh">推导两点 Gauss 求积公式的权重和节点。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>Step 1：对 $f = 1$ 精确 → 求 $w_0 + w_1$</h4>
+        <p>$$\int_{-1}^1 1\,dx = 2 = w_0 + w_1$$</p>
+
+        <h4>Step 2：对 $f = x$ 精确 → 利用对称性</h4>
+        <p>$$\int_{-1}^1 x\,dx = 0 = -\alpha w_0 + \alpha w_1 = \alpha(w_1 - w_0)$$</p>
+        <p>由于 $\alpha > 0$，$w_0 = w_1$。结合 Step 1：$\boxed{w_0 = w_1 = 1}$。</p>
+
+        <h4>Step 3：对 $f = x^2$ 精确 → 求 $\alpha$</h4>
+        <p>$$\int_{-1}^1 x^2\,dx = \frac{2}{3} = 1 \cdot \alpha^2 + 1 \cdot \alpha^2 = 2\alpha^2$$</p>
+        <p>$$\alpha^2 = \frac{1}{3} \quad\Rightarrow\quad \boxed{\alpha = \frac{1}{\sqrt{3}}}$$</p>
+
+        <h4>Step 4：验证 $f = x^3$</h4>
+        <p>$$\int_{-1}^1 x^3\,dx = 0$$</p>
+        <p>$$w_0 f(-\alpha) + w_1 f(\alpha) = 1 \cdot (-\alpha)^3 + 1 \cdot \alpha^3 = 0 \quad\checkmark$$</p>
+        <p>（由对称性自动成立——奇函数在对称区间上积分为零）</p>
+
+        <div class="theorem-card">
+          <div class="theorem-title">Gauss-Legendre 求积</div>
+          <p>这就是两点 Gauss-Legendre 求积公式！$n$ 点 Gauss 求积能精确积分 $2n-1$ 次多项式（比 $n$ 点 Newton-Cotes 多约一倍精度）。节点是 Legendre 多项式的零点。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Composite trapezoid -->
+    <div class="question-card" id="q6-composite">
+      <div class="question-header">
+        <span class="question-id">Q6(c) — 复合梯形与周期函数</span>
+        <div class="question-tags"><span class="badge badge-year">2013 Resit/Mock</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">State the composite trapezoid rule for a periodic function on $[0, 2\pi]$. Give an intuitive explanation why all weights are identical.</div>
+        <div class="zh">写出 $[0,2\pi]$ 上周期函数的复合梯形法则，并解释为何所有权重相同。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>复合梯形法则</h4>
+        <p>将 $[0,2\pi]$ 分为 $m$ 等份，$h = 2\pi/m$，$x_k = kh$。</p>
+        <p>一般复合梯形：</p>
+        <p>$$I_m(f) = h\left[\frac{f(x_0)}{2} + f(x_1) + \cdots + f(x_{m-1}) + \frac{f(x_m)}{2}\right]$$</p>
+
+        <h4>周期函数简化</h4>
+        <p>对于周期函数，$f(0) = f(2\pi)$，首尾半权重合并：</p>
+        <p>$$\boxed{I_m(f) = h\sum_{k=0}^{m-1} f(x_k) = \frac{2\pi}{m}\sum_{k=0}^{m-1} f(kh)}$$</p>
+
+        <h4>所有权重相同的直觉解释</h4>
+        <p>对于周期函数，每个节点在区间中的"地位"完全对等——没有端点效应（端点就是内点的周期延拓）。每个点代表宽度为 $h$ 的一小段，用该点的函数值乘以 $h$ 来近似该段面积，所以所有权重都等于 $h$。</p>
+      </div>
+    </div>
+
+    <!-- Triangle quadrature -->
+    <div class="question-card" id="q6-triangle">
+      <div class="question-header">
+        <span class="question-id">Q6(d) — 三角域积分</span>
+        <div class="question-tags"><span class="badge badge-year">2013/2017</span></div>
+      </div>
+      <div class="question-body">
+        <div class="en">Let $T$ be the unit triangle with vertices $(0,0), (1,0), (1,1)$. Show that
+$$\int_T g(x,y)\,dydx \approx \sum_{i,j=0}^n g(\xi_i, \xi_j\xi_i)\,\xi_i\omega_i\omega_j$$
+using substitution $y = \mu x$.</div>
+        <div class="zh">利用变量替换将三角形上的积分化为两个 $[0,1]$ 上的一维积分，再用求积公式近似。</div>
+      </div>
+      <button class="solution-toggle" onclick="toggleSolution(this)">
+        <span class="arrow">▶</span> 查看解析
+      </button>
+      <div class="solution-content">
+        <h4>推导</h4>
+        <p>原积分：$\int_0^1 \int_0^x g(x,y)\,dy\,dx$</p>
+
+        <div class="step">
+          <div class="step-label">变量替换 $y = \mu x$</div>
+          <p>固定 $x$，令 $y = \mu x$，$dy = x\,d\mu$。当 $y: 0 \to x$ 时，$\mu: 0 \to 1$。</p>
+          <p>$$\int_0^x g(x,y)\,dy = \int_0^1 g(x, \mu x)\,x\,d\mu$$</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">双重积分</div>
+          <p>$$\int_T g\,dydx = \int_0^1 \int_0^1 g(x, \mu x)\,x\,d\mu\,dx = \int_0^1 x\left[\int_0^1 g(x,\mu x)\,d\mu\right]dx$$</p>
+          <p>两个积分都在 $[0,1]$ 上！</p>
+        </div>
+
+        <div class="step">
+          <div class="step-label">应用求积公式</div>
+          <p>对内层（$\mu$ 积分）用 $I_n$：$\int_0^1 g(x, \mu x)d\mu \approx \sum_{j=0}^n g(x, \xi_j x)\omega_j$</p>
+          <p>对外层（$x$ 积分，含因子 $x$）用 $I_n$：</p>
+          <p>$$\int_0^1 x \sum_j g(x,\xi_j x)\omega_j\,dx \approx \sum_{i=0}^n \xi_i \sum_{j=0}^n g(\xi_i, \xi_j\xi_i)\omega_j\,\omega_i$$</p>
+        </div>
+
+        <p>$$\boxed{\int_T g(x,y)\,dydx \approx \sum_{i,j=0}^n g(\xi_i, \xi_j\xi_i)\,\xi_i\omega_i\omega_j} \qquad\blacksquare$$</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>由 <strong>Karcen Zheng</strong> 制作 · <a href="mailto:karcen@example.com">联系我</a></p>
+    <p style="margin-top:4px;font-size:0.75rem;">MATH7601 Computational Methods and Programming · UCL · 2013–2017 历年真题</p>
+  </footer>
+</main>
+
+<script>
+// ===== Theme Toggle =====
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.removeAttribute('data-theme');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'dark');
+  }
+  // Redraw canvases
+  setTimeout(() => { drawGershgorin(currentGershExample); updateInterp(); }, 100);
+}
+
+// Load saved theme
+if (localStorage.getItem('theme') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeToggle').textContent = '☀️';
+}
+
+// ===== Solution Toggle =====
+function toggleSolution(btn) {
+  btn.classList.toggle('open');
+  const content = btn.nextElementSibling;
+  content.classList.toggle('show');
+  if (content.classList.contains('show')) {
+    MathJax.typesetPromise && MathJax.typesetPromise([content]);
+  }
+}
+
+// ===== Copy Code =====
+function copyCode(btn) {
+  const code = btn.closest('.code-block').querySelector('code').textContent;
+  navigator.clipboard.writeText(code).then(() => {
+    btn.textContent = '已复制 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 1500);
+  });
+}
+
+// ===== Active Nav Link =====
+const sections = document.querySelectorAll('.topic-section');
+const navLinks = document.querySelectorAll('.nav-link');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    if (window.scrollY >= s.offsetTop - 120) current = s.id;
+  });
+  navLinks.forEach(l => {
+    l.classList.remove('active');
+    if (l.getAttribute('href') === '#' + current) l.classList.add('active');
+  });
+});
+
+// ===== Gershgorin Visualization =====
+let currentGershExample = 1;
+function drawGershgorin(example) {
+  currentGershExample = example;
+  document.querySelectorAll('#gershgorin-viz .viz-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === example - 1);
+  });
+  const canvas = document.getElementById('gershCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = isDark ? '#242018' : '#FFFFFF';
+  ctx.fillRect(0, 0, W, H);
+
+  let matrices = [
+    { A: [[4,1,0],[1,3,1],[0,1,2]], label: 'A₁' },
+    { A: [[1,2,3],[0,5,1],[1,0,3]], label: 'A₂' },
+    { A: [[10,1,0],[0,8,1],[1,0,6]], label: 'A₃ (对角占优)' },
+  ];
+  let mat = matrices[example - 1];
+  let A = mat.A;
+  let n = A.length;
+
+  // Compute Gershgorin disks
+  let disks = [];
+  for (let i = 0; i < n; i++) {
+    let center = A[i][i];
+    let radius = 0;
+    for (let j = 0; j < n; j++) if (j !== i) radius += Math.abs(A[i][j]);
+    disks.push({ cx: center, cy: 0, r: radius });
+  }
+
+  // Compute actual eigenvalues (for small matrices, use characteristic equation approach or power method)
+  // For 3x3 we'll use a simple eigenvalue computation
+  let eigenvals = computeEigenvalues3x3(A);
+
+  // Determine plot range
+  let xmin = Infinity, xmax = -Infinity, ymin = Infinity, ymax = -Infinity;
+  disks.forEach(d => {
+    xmin = Math.min(xmin, d.cx - d.r - 1);
+    xmax = Math.max(xmax, d.cx + d.r + 1);
+    ymin = Math.min(ymin, d.cy - d.r - 1);
+    ymax = Math.max(ymax, d.cy + d.r + 1);
+  });
+  // Make symmetric in y
+  let ym = Math.max(Math.abs(ymin), Math.abs(ymax));
+  ymin = -ym; ymax = ym;
+
+  let pad = 40;
+  let scaleX = (W - 2*pad) / (xmax - xmin);
+  let scaleY = (H - 2*pad) / (ymax - ymin);
+  let scale = Math.min(scaleX, scaleY);
+
+  function toCanvas(x, y) {
+    return [pad + (x - xmin) * scale, H - pad - (y - ymin) * scale];
+  }
+
+  // Axes
+  ctx.strokeStyle = isDark ? '#3A3428' : '#E5DFD3';
+  ctx.lineWidth = 1;
+  let [ox0, oy0] = toCanvas(xmin, 0);
+  let [ox1] = toCanvas(xmax, 0);
+  ctx.beginPath(); ctx.moveTo(ox0, oy0); ctx.lineTo(ox1, oy0); ctx.stroke();
+  let [, vy0] = toCanvas(0, ymin);
+  let [vx0, vy1] = toCanvas(0, ymax);
+  ctx.beginPath(); ctx.moveTo(vx0, vy0); ctx.lineTo(vx0, vy1); ctx.stroke();
+
+  // Draw disks
+  let colors = ['rgba(46,125,91,0.15)', 'rgba(196,93,62,0.15)', 'rgba(106,79,160,0.15)'];
+  let borderColors = ['#2E7D5B', '#C45D3E', '#6A4FA0'];
+  disks.forEach((d, i) => {
+    let [cx, cy] = toCanvas(d.cx, d.cy);
+    let r = d.r * scale;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.fillStyle = colors[i % 3];
+    ctx.fill();
+    ctx.strokeStyle = borderColors[i % 3];
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    // Label
+    ctx.fillStyle = borderColors[i % 3];
+    ctx.font = '12px Inter, sans-serif';
+    ctx.fillText(`R${i+1}: center=${d.cx}, r=${d.r}`, cx - r * 0.5, cy - r - 8);
+  });
+
+  // Draw eigenvalues
+  eigenvals.forEach(ev => {
+    let [ex, ey] = toCanvas(ev.re, ev.im);
+    ctx.beginPath();
+    ctx.arc(ex, ey, 5, 0, Math.PI * 2);
+    ctx.fillStyle = '#E74C3C';
+    ctx.fill();
+    ctx.strokeStyle = isDark ? '#1A1714' : '#FFFFFF';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  });
+
+  // Title
+  ctx.fillStyle = isDark ? '#E8E0D4' : '#2C2417';
+  ctx.font = 'bold 14px Inter, sans-serif';
+  ctx.fillText(mat.label, 10, 20);
+}
+
+function computeEigenvalues3x3(A) {
+  // Simple numerical eigenvalue for 3x3 using companion polynomial
+  // p(λ) = -λ³ + tr(A)λ² - ... + det(A)
+  // We'll just use a rough iterative approach
+  let results = [];
+  let a = A[0][0], b = A[0][1], c = A[0][2];
+  let d = A[1][0], e = A[1][1], f = A[1][2];
+  let g = A[2][0], h = A[2][1], k = A[2][2];
+
+  let tr = a + e + k;
+  let cofSum = (a*e - b*d) + (a*k - c*g) + (e*k - f*h);
+  let det = a*(e*k - f*h) - b*(d*k - f*g) + c*(d*h - e*g);
+
+  // Solve λ³ - tr*λ² + cofSum*λ - det = 0
+  // Using Cardano or numerical root finding
+  // Simple approach: find roots numerically
+  let roots = solveCubic(1, -tr, cofSum, -det);
+  roots.forEach(r => results.push({ re: r, im: 0 }));
+  return results;
+}
+
+function solveCubic(a, b, c, d) {
+  // Numerical roots of ax³ + bx² + cx + d = 0
+  b /= a; c /= a; d /= a;
+  let p = c - b*b/3;
+  let q = 2*b*b*b/27 - b*c/3 + d;
+  let disc = q*q/4 + p*p*p/27;
+
+  let roots = [];
+  if (disc > 0.0001) {
+    let u = Math.cbrt(-q/2 + Math.sqrt(disc));
+    let v = Math.cbrt(-q/2 - Math.sqrt(disc));
+    roots.push(u + v - b/3);
+    // Complex roots - approximate as real for display
+    let re = -(u+v)/2 - b/3;
+    roots.push(re);
+    roots.push(re);
+  } else {
+    let r = Math.sqrt(-p*p*p/27);
+    let theta = Math.acos(-q/(2*r));
+    let m = 2 * Math.cbrt(r);
+    roots.push(m * Math.cos(theta/3) - b/3);
+    roots.push(m * Math.cos((theta + 2*Math.PI)/3) - b/3);
+    roots.push(m * Math.cos((theta + 4*Math.PI)/3) - b/3);
+  }
+  return roots;
+}
+
+// ===== Interpolation Visualization =====
+let showRunge = false;
+function toggleRunge() {
+  showRunge = !showRunge;
+  document.querySelectorAll('#interp-viz .viz-btn').forEach(b => {
+    b.classList.toggle('active', showRunge);
+  });
+  updateInterp();
+}
+
+function updateInterp() {
+  let nNodes = parseInt(document.getElementById('nNodesSlider').value);
+  document.getElementById('nNodesLabel').textContent = nNodes;
+
+  const canvas = document.getElementById('interpCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.width, H = canvas.height;
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = isDark ? '#242018' : '#FFFFFF';
+  ctx.fillRect(0, 0, W, H);
+
+  let pad = 40;
+  let xmin = -1, xmax = 1, ymin = -0.5, ymax = 1.5;
+  if (showRunge && nNodes > 8) { ymin = -2; ymax = 2; }
+
+  function toC(x, y) {
+    return [(x - xmin) / (xmax - xmin) * (W - 2*pad) + pad,
+            H - pad - (y - ymin) / (ymax - ymin) * (H - 2*pad)];
+  }
+
+  // Axes
+  ctx.strokeStyle = isDark ? '#3A3428' : '#E5DFD3';
+  ctx.lineWidth = 1;
+  let [ax0, ay0] = toC(xmin, 0); let [ax1] = toC(xmax, 0);
+  ctx.beginPath(); ctx.moveTo(ax0, ay0); ctx.lineTo(ax1, ay0); ctx.stroke();
+
+  // Target function
+  let f = showRunge ? (x => 1/(1+25*x*x)) : (x => Math.cos(Math.PI * x));
+
+  // Draw target function
+  ctx.strokeStyle = isDark ? '#7D7162' : '#9A8C7A';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  for (let i = 0; i <= 200; i++) {
+    let x = xmin + i/200 * (xmax - xmin);
+    let y = f(x);
+    let [cx, cy] = toC(x, y);
+    i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Interpolation nodes (equidistant)
+  let nodes = [];
+  for (let i = 0; i < nNodes; i++) {
+    let x = xmin + i / (nNodes - 1) * (xmax - xmin);
+    nodes.push({ x, y: f(x) });
+  }
+
+  // Lagrange interpolation
+  function lagrange(t) {
+    let val = 0;
+    for (let k = 0; k < nodes.length; k++) {
+      let Lk = 1;
+      for (let j = 0; j < nodes.length; j++) {
+        if (j !== k) Lk *= (t - nodes[j].x) / (nodes[k].x - nodes[j].x);
+      }
+      val += nodes[k].y * Lk;
+    }
+    return val;
+  }
+
+  // Draw interpolant
+  ctx.strokeStyle = '#C45D3E';
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i <= 300; i++) {
+    let x = xmin + i/300 * (xmax - xmin);
+    let y = lagrange(x);
+    y = Math.max(ymin - 1, Math.min(ymax + 1, y));
+    let [cx, cy] = toC(x, y);
+    i === 0 ? ctx.moveTo(cx, cy) : ctx.lineTo(cx, cy);
+  }
+  ctx.stroke();
+
+  // Draw nodes
+  nodes.forEach(n => {
+    let [cx, cy] = toC(n.x, n.y);
+    ctx.beginPath();
+    ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#2E7D5B';
+    ctx.fill();
+    ctx.strokeStyle = isDark ? '#1A1714' : '#FFFFFF';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  });
+
+  // Labels
+  ctx.fillStyle = isDark ? '#E8E0D4' : '#2C2417';
+  ctx.font = '12px Inter, sans-serif';
+  ctx.fillText(showRunge ? 'f(x) = 1/(1+25x²)' : 'f(x) = cos(πx)', pad + 5, 20);
+  ctx.fillStyle = '#C45D3E';
+  ctx.fillText(`P${nNodes-1}(x) 插值`, pad + 5, 36);
+}
+
+// ===== Init =====
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    drawGershgorin(1);
+    updateInterp();
+  }, 300);
+});
+</script>
+</body>
+</html>
